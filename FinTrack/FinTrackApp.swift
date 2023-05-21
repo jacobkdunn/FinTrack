@@ -13,7 +13,8 @@ struct FinTrackApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            EntryView()
+            ExpenseEntryView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

@@ -8,37 +8,54 @@
 import SwiftUI
 import CoreData
 
-struct ContentView: View {
+
+
+struct ExpenseEntryView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
+    
+    @State var vendor: String = ""
+    @State var description: String = ""
+    @State var amount: Double = 0.00
 
     var body: some View {
+        
         NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
-                    }
+            VStack {
+                Text("Add an Expense")
+                TextField("Vendor", text: $vendor)
+                    .padding(.leading)
+                TextField("Description", text: $description)
+                    .padding(.leading)
+                TextField("Amount ($)", text: $description)
+                    .padding(.leading)
+                    .keyboardType(.decimalPad)
+                Picker(selection: .constant(0), label: Text("Category")) {
+                    Text("Groceries").tag(0)
+                    Text("Housing").tag(1)
+                    Text("Take out/Order in").tag(2)
+                    Text("Transportation").tag(3)
+                    Text("Savings").tag(4)
+                    Text("School").tag(5)
+                    Text("Travel").tag(6)
+                    Text("Miscellaneous").tag(7)
+                    Text("Not Applicable").tag(8)
                 }
-                .onDelete(perform: deleteItems)
+                Picker("Subcategory", selection: .constant(1)) {
+                    Text("Text").tag(1)
+                }
+                Button("Add") {
+                    /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
+                }
+                .buttonStyle(.bordered)
+                
+                
+                
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-            Text("Select an item")
         }
     }
 
@@ -83,6 +100,6 @@ private let itemFormatter: DateFormatter = {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ExpenseEntryView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
