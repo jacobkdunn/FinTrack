@@ -20,33 +20,32 @@ struct ExpenseEntryView: View {
     
     @State var vendor: String = ""
     @State var description: String = ""
-    @State var amount: Double = 0.00
+    @State var amount: String = ""
 
     var body: some View {
         
         NavigationView {
             VStack {
                 Text("Add an Expense")
-                TextField("Vendor", text: $vendor)
-                    .padding(.leading)
-                TextField("Description", text: $description)
-                    .padding(.leading)
-                TextField("Amount ($)", text: $description)
-                    .padding(.leading)
-                    .keyboardType(.decimalPad)
-                Picker(selection: .constant(0), label: Text("Category")) {
-                    Text("Groceries").tag(0)
-                    Text("Housing").tag(1)
-                    Text("Take out/Order in").tag(2)
-                    Text("Transportation").tag(3)
-                    Text("Savings").tag(4)
-                    Text("School").tag(5)
-                    Text("Travel").tag(6)
-                    Text("Miscellaneous").tag(7)
-                    Text("Not Applicable").tag(8)
-                }
-                Picker("Subcategory", selection: .constant(1)) {
-                    Text("Text").tag(1)
+                Form {
+                    TextField("Vendor", text: $vendor)
+                    TextField("Description", text: $description, axis: .vertical)
+                    TextField("Amount ($)", text: $amount)
+                        .keyboardType(.decimalPad)
+                    Picker(selection: .constant(0), label: Text("Category")) {
+                        Text("Groceries").tag(0)
+                        Text("Housing").tag(1)
+                        Text("Take out/Order in").tag(2)
+                        Text("Transportation").tag(3)
+                        Text("Savings").tag(4)
+                        Text("School").tag(5)
+                        Text("Travel").tag(6)
+                        Text("Miscellaneous").tag(7)
+                        Text("Not Applicable").tag(8)
+                    }
+                    Picker("Subcategory", selection: .constant(1)) {
+                        Text("Text").tag(1)
+                    }
                 }
                 Button("Add") {
                     /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
