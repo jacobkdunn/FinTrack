@@ -65,7 +65,6 @@
 				70CDC2082A1AAA8E0016023E /* Views */,
 				70CDC2172A1C32D80016023E /* Controllers */,
 				70CDC1F82A19C4D00016023E /* Assets.xcassets */,
-				70CDC1FD2A19C4D00016023E /* Persistence.swift */,
 				70CDC2022A19C4D00016023E /* Info.plist */,
 				70CDC1FA2A19C4D00016023E /* Preview Content */,
 			);
@@ -101,6 +100,7 @@
 		70CDC2172A1C32D80016023E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				70CDC1FD2A19C4D00016023E /* Persistence.swift */,
 			);
 			name = Controllers;
 			path = Views/Controllers;

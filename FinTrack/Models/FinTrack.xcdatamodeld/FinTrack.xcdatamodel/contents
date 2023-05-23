@@ -7,14 +7,14 @@
         <relationship name="subcategories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Subcategory" inverseName="parentCategory" inverseEntity="Subcategory"/>
     </entity>
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
-        <attribute name="amount" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="category" attributeType="String" defaultValueString="&quot;&quot;"/>
-        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="itemAmount" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="itemCategory" attributeType="String" defaultValueString="&quot;&quot;"/>
         <attribute name="itemDescription" optional="YES" attributeType="String"/>
-        <attribute name="subcategory" optional="YES" attributeType="String"/>
-        <attribute name="timeStamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="title" attributeType="String" defaultValueString="&quot;&quot;"/>
-        <attribute name="transactionTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="itemID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="itemSubcategory" optional="YES" attributeType="String"/>
+        <attribute name="itemTimeStamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="itemTitle" attributeType="String" defaultValueString="&quot;&quot;"/>
+        <attribute name="itemTransactionTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <entity name="Subcategory" representedClassName="Subcategory" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>

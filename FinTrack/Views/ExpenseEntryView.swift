@@ -23,6 +23,35 @@ struct ExpenseEntryView: View {
     @State var vendor: String = ""
     @State var description: String = ""
     @State var amount: String = ""
+ 
+    @State var category = ""
+    @State var currentCategoryIndex = 0 {
+        didSet {
+            category = categories[currentCategoryIndex]
+        }
+    }
+    let categories: [String] = [
+        "Groceries",
+        "Housing",
+        "Take out/Order in",
+        "Transportation",
+        "Savings",
+        "School",
+        "Travel",
+        "Miscellaneous",
+        "Not Applicable"
+    ]
+    
+    @State var subcategory = ""
+    @State var currentSubcategoryIndex = 0 {
+        didSet {
+            subcategory = subcategories[currentSubcategoryIndex]
+        }
+    }
+    let subcategories: [String] = [
+        "Subcategory 1",
+        "Subcategory 2"
+    ]
 
     var body: some View {
         
@@ -31,26 +60,26 @@ struct ExpenseEntryView: View {
                 Text("Add an Expense")
                 Form {
                     TextField("Vendor", text: $vendor)
+                    
                     TextField("Description", text: $description, axis: .vertical)
+                    
                     TextField("Amount ($)", text: $amount)
                         .keyboardType(.decimalPad)
-                    Picker(selection: .constant(0), label: Text("Category")) {
-                        Text("Groceries").tag(0)
-                        Text("Housing").tag(1)
-                        Text("Take out/Order in").tag(2)
-                        Text("Transportation").tag(3)
-                        Text("Savings").tag(4)
-                        Text("School").tag(5)
-                        Text("Travel").tag(6)
-                        Text("Miscellaneous").tag(7)
-                        Text("Not Applicable").tag(8)
-                    }
-                    Picker("Subcategory", selection: .constant(1)) {
-                        Text("Text").tag(1)
-                    }
+                    
+                    Picker(selection: $category, label: Text("Category")) {
+                        ForEach(categories, id: \.self) { index in
+                               Text(index)
+                           }
+                        }
+
+                    Picker(selection: $subcategory, label: Text("Subcategory")) {
+                        ForEach(subcategories, id: \.self) { index in
+                               Text(index)
+                           }
+                        }
                 }
                 Button("Add") {
-                    /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
+                    addItem()
                 }
                 .buttonStyle(.bordered)
                 
@@ -62,8 +91,14 @@ struct ExpenseEntryView: View {
 
     private func addItem() {
         withAnimation {
-            let newItem = Type(context: viewContext)
-            newItem.name = String()
+            let newItem = Item(context: viewContext)
+            newItem.itemTitle = vendor
+            newItem.itemDescription = description
+            newItem.itemAmount = Double(amount)!
+            newItem.itemCategory = category
+            newItem.itemSubcategory = subcategory
+            newItem.itemTimeStamp = Date()
+            newItem.itemTransactionTime = Date()
 
             do {
                 try viewContext.save()
@@ -73,6 +108,20 @@ struct ExpenseEntryView: View {
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
+            
+            func getCoreDataDBPath() {
+                    let path = FileManager
+                        .default
+                        .urls(for: .applicationSupportDirectory, in: .userDomainMask)
+                        .last?
+                        .absoluteString
+                        .replacingOccurrences(of: "file://", with: "")
+                        .removingPercentEncoding
+
+                    print("Core Data DB Path :: \(path ?? "Not found")")
+                }
+            
+            getCoreDataDBPath()
         }
     }
 
