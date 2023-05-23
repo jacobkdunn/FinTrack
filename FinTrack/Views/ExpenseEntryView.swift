@@ -14,9 +14,11 @@ struct ExpenseEntryView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Type.name, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<Item>
+    private var items: FetchedResults<Type>
+    
+    
     
     @State var vendor: String = ""
     @State var description: String = ""
@@ -60,8 +62,8 @@ struct ExpenseEntryView: View {
 
     private func addItem() {
         withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+            let newItem = Type(context: viewContext)
+            newItem.name = String()
 
             do {
                 try viewContext.save()

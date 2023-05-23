@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct EntryView: View {
+struct ListView: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
-struct EntryView_Previews: PreviewProvider {
+struct ListView_Previews: PreviewProvider {
     static var previews: some View {
-        EntryView()
+        ListView()
     }
 }

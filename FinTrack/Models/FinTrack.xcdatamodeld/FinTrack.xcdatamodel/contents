@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22E261" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Category" representedClassName="Category" syncable="YES" codeGenerationType="class">
+        <attribute name="icon" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="parentType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Types" inverseName="categories" inverseEntity="Types"/>
+        <relationship name="parentType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Type" inverseName="categories" inverseEntity="Type"/>
         <relationship name="subcategories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Subcategory" inverseName="parentCategory" inverseEntity="Subcategory"/>
+    </entity>
+    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
+        <attribute name="amount" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="category" attributeType="String" defaultValueString="&quot;&quot;"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="itemDescription" optional="YES" attributeType="String"/>
+        <attribute name="subcategory" optional="YES" attributeType="String"/>
+        <attribute name="timeStamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" attributeType="String" defaultValueString="&quot;&quot;"/>
+        <attribute name="transactionTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <entity name="Subcategory" representedClassName="Subcategory" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="parentCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="subcategories" inverseEntity="Category"/>
     </entity>
-    <entity name="Types" representedClassName="Types" syncable="YES" codeGenerationType="class">
-        <attribute name="itemType" optional="YES" attributeType="String"/>
+    <entity name="Type" representedClassName="Type" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="parentType" inverseEntity="Category"/>
     </entity>
 </model>
