@@ -1,20 +1,62 @@
 //
-//  EntryView.swift
+//  ListView.swift
 //  FinTrack
 //
-//  Created by Jacob Dunn on 2023-05-21.
+//  Created by Jacob Dunn on 2023-05-25.
 //
 
 import SwiftUI
+import CoreData
+
+let testData: [String: String] = ["First": "1", "Second":"2"]
+
+
+
+//MARK: - List View Row
+
+struct ListViewRow: View {
+    
+    var body: some View {
+        Text(testData["First"]!)
+    }
+}
+
+struct ListViewRow_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        ListViewRow()
+    }
+}
+
+//MARK: - List View
 
 struct ListView: View {
+    
+    
+    
+    @Environment(\.managedObjectContext) private var viewContext
+
+//    @FetchRequest(
+//        sortDescriptors: [NSSortDescriptor(keyPath: \Item.itemTitle, ascending: true)],
+//        animation: .default)
+    
+    @FetchRequest(sortDescriptors: []) var TrackerListEntries: FetchedResults<TrackerListEntry>
+    
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("One")
+        List {
+            ForEach(TrackerListEntries) { name in
+                Text(name.itemTitle!)
+            }
+        }
     }
 }
 
 struct ListView_Previews: PreviewProvider {
     static var previews: some View {
-        ListView()
+        ListView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
+
+

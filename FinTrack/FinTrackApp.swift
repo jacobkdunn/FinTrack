@@ -13,9 +13,18 @@ struct FinTrackApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ListView()
-            ExpenseEntryView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            TabView {
+                ListView()
+                    .tabItem {
+                        Text("List")
+                    }
+                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                ExpenseEntryView()
+                    .tabItem {
+                        Text("Enter")
+                    }
+                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            }
         }
     }
 }

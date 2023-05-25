@@ -11,12 +11,14 @@ import CoreData
 
 
 struct ExpenseEntryView: View {
+    
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Type.name, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<Type>
+    
+    var items: FetchedResults<Type>
     
     
     
@@ -82,16 +84,13 @@ struct ExpenseEntryView: View {
                     addItem()
                 }
                 .buttonStyle(.bordered)
-                
-                
-                
             }
         }
     }
 
     private func addItem() {
         withAnimation {
-            let newItem = Item(context: viewContext)
+            let newItem = TrackerListEntry(context: viewContext)
             newItem.itemTitle = vendor
             newItem.itemDescription = description
             newItem.itemAmount = Double(amount)!
@@ -150,6 +149,6 @@ private let itemFormatter: DateFormatter = {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ExpenseEntryView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ExpenseEntryView()
     }
 }

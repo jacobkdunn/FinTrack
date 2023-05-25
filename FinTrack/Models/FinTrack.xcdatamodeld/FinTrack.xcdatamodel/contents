@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22E261" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F66" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Category" representedClassName="Category" syncable="YES" codeGenerationType="class">
         <attribute name="icon" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="entries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TrackerListEntry" inverseName="category" inverseEntity="TrackerListEntry"/>
         <relationship name="parentType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Type" inverseName="categories" inverseEntity="Type"/>
         <relationship name="subcategories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Subcategory" inverseName="parentCategory" inverseEntity="Subcategory"/>
     </entity>
-    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
+    <entity name="Subcategory" representedClassName="Subcategory" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="entries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TrackerListEntry" inverseName="subtype" inverseEntity="TrackerListEntry"/>
+        <relationship name="parentCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="subcategories" inverseEntity="Category"/>
+    </entity>
+    <entity name="TrackerListEntry" representedClassName="TrackerListEntry" syncable="YES" codeGenerationType="class">
         <attribute name="itemAmount" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="itemCategory" attributeType="String" defaultValueString="&quot;&quot;"/>
         <attribute name="itemDescription" optional="YES" attributeType="String"/>
@@ -15,13 +21,13 @@
         <attribute name="itemTimeStamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="itemTitle" attributeType="String" defaultValueString="&quot;&quot;"/>
         <attribute name="itemTransactionTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-    </entity>
-    <entity name="Subcategory" representedClassName="Subcategory" syncable="YES" codeGenerationType="class">
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="parentCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="subcategories" inverseEntity="Category"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="entries" inverseEntity="Category"/>
+        <relationship name="subtype" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Subcategory" inverseName="entries" inverseEntity="Subcategory"/>
+        <relationship name="type" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Type" inverseName="entries" inverseEntity="Type"/>
     </entity>
     <entity name="Type" representedClassName="Type" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="parentType" inverseEntity="Category"/>
+        <relationship name="entries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TrackerListEntry" inverseName="type" inverseEntity="TrackerListEntry"/>
     </entity>
 </model>
