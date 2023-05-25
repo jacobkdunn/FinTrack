@@ -21,7 +21,6 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             List {
-//                Label("Category", systemImage: "carrot")
                 ForEach(Categories) { category in
                     Text(category.name!)
                 }
@@ -38,6 +37,7 @@ struct SettingsView: View {
         presentTextInputAlert(title: "Add Category", message: "Enter Category Name") { text in
             let newCategory = Category(context: viewContext)
             newCategory.name = text
+            newCategory.id = UUID()
             try? viewContext.save()
         }
     }
