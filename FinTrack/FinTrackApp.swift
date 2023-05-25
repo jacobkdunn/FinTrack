@@ -24,6 +24,11 @@ struct FinTrackApp: App {
                         Text("Enter")
                     }
                     .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                SettingsView()
+                    .tabItem {
+                       Text("Settings")
+                    }
+                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
             }
         }
     }

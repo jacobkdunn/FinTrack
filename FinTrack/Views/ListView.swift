@@ -44,10 +44,15 @@ struct ListView: View {
     
     
     var body: some View {
-        Text("One")
         List {
-            ForEach(TrackerListEntries) { name in
-                Text(name.itemTitle!)
+            ForEach(TrackerListEntries) { item in
+//                HStack {
+//                    Text(item.itemTitle!)
+//                    Spacer()
+//                    Image(systemName: "carrot")
+//                }
+                Label(item.itemTitle!, systemImage: "carrot")
+
             }
         }
     }
