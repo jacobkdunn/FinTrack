@@ -16,15 +16,13 @@ struct SettingsView: View {
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(Categories) { category in
-                    Text(category.name!)
-                }
-                .onDelete { index in
-                    addCategory()
+            List(Categories) { category in
+                NavigationLink{
+                    SubcategoryView(category: category)
+                } label: { Text(category.name!)
                 }
             }
-            .navigationTitle("Category")
+            .navigationTitle("Categories")
             .navigationBarItems(trailing: Button(action: addCategory, label: {
                 Image(systemName: "plus")
             }))
@@ -32,7 +30,7 @@ struct SettingsView: View {
         
         
     }
-    private func addCategory() {
+    func addCategory() {
         presentTextInputAlert(title: "Add Category", message: "Enter Category Name") { text in
             let newCategory = Category(context: viewContext)
             newCategory.name = text

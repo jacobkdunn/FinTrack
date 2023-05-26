@@ -32,6 +32,8 @@ struct FinTrackApp: App {
                         Image(systemName: "gearshape.fill")
                     }
                     .environment(\.managedObjectContext, persistenceController.container.viewContext)
+//                SubcategoryView()
+//                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
             }
         }
     }

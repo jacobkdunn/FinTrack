@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		701875A82A1FF1F700EAB064 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701875A72A1FF1F700EAB064 /* SettingsView.swift */; };
+		709491832A20F88200553DD1 /* SubcategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709491822A20F88200553DD1 /* SubcategoryView.swift */; };
 		70CDC1F52A19C4CF0016023E /* FinTrackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CDC1F42A19C4CF0016023E /* FinTrackApp.swift */; };
 		70CDC1F72A19C4CF0016023E /* ExpenseEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CDC1F62A19C4CF0016023E /* ExpenseEntryView.swift */; };
 		70CDC1F92A19C4D00016023E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70CDC1F82A19C4D00016023E /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		701875A72A1FF1F700EAB064 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		709491822A20F88200553DD1 /* SubcategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubcategoryView.swift; sourceTree = "<group>"; };
 		70CDC1F12A19C4CF0016023E /* FinTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70CDC1F42A19C4CF0016023E /* FinTrackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinTrackApp.swift; sourceTree = "<group>"; };
 		70CDC1F62A19C4CF0016023E /* ExpenseEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseEntryView.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				70CDC2362A1FBF670016023E /* ListView.swift */,
 				70CDC1F62A19C4CF0016023E /* ExpenseEntryView.swift */,
 				701875A72A1FF1F700EAB064 /* SettingsView.swift */,
+				709491822A20F88200553DD1 /* SubcategoryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 				701875A82A1FF1F700EAB064 /* SettingsView.swift in Sources */,
 				70CDC1FE2A19C4D00016023E /* Persistence.swift in Sources */,
 				70CDC1F72A19C4CF0016023E /* ExpenseEntryView.swift in Sources */,
+				709491832A20F88200553DD1 /* SubcategoryView.swift in Sources */,
 				70CDC2372A1FBF670016023E /* ListView.swift in Sources */,
 				70CDC1F52A19C4CF0016023E /* FinTrackApp.swift in Sources */,
 				70CDC2012A19C4D00016023E /* FinTrack.xcdatamodeld in Sources */,
