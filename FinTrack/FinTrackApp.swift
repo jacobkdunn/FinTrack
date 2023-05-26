@@ -17,16 +17,19 @@ struct FinTrackApp: App {
                 ListView()
                     .tabItem {
                         Text("List")
+                        Image(systemName: "list.bullet.rectangle.portrait.fill")
                     }
                     .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 ExpenseEntryView()
                     .tabItem {
                         Text("Enter")
+                        Image(systemName: "doc.fill.badge.plus")
                     }
                     .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 SettingsView()
                     .tabItem {
                        Text("Settings")
+                        Image(systemName: "gearshape.fill")
                     }
                     .environment(\.managedObjectContext, persistenceController.container.viewContext)
             }

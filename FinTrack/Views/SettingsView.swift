@@ -11,10 +11,6 @@ struct SettingsView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     
-    //    @FetchRequest(
-    //        sortDescriptors: [NSSortDescriptor(keyPath: \Item.itemTitle, ascending: true)],
-    //        animation: .default)
-    
     @FetchRequest(sortDescriptors: []) var  Categories: FetchedResults<Category>
     
     
@@ -23,6 +19,9 @@ struct SettingsView: View {
             List {
                 ForEach(Categories) { category in
                     Text(category.name!)
+                }
+                .onDelete { index in
+                    addCategory()
                 }
             }
             .navigationTitle("Category")
@@ -41,6 +40,7 @@ struct SettingsView: View {
             try? viewContext.save()
         }
     }
+    
 }
 
 func presentTextInputAlert(title: String, message: String, completion: @escaping (_ text: String) -> Void) {
