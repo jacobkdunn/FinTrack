@@ -15,28 +15,15 @@ struct ExpenseEntryView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @FetchRequest(sortDescriptors: []) var  categories: FetchedResults<Category>
-    @FetchRequest var  subcategories: FetchedResults<Subcategory>
-    
-    init(filter: String) {
-        _subcategories = FetchRequest<Subcategory>(sortDescriptors: [], predicate: NSPredicate(format: "parentCategory.name == %@", filter))
-    }
+    @FetchRequest(sortDescriptors: []) var subcategories: FetchedResults<Subcategory>
+
     
     @State var vendor: String = ""
     @State var description: String = ""
     @State var amount: String = ""
  
     @State var chosenCategory: String = ""
-    
-//    @State var subcategory = ""
-//    @State var currentSubcategoryIndex = 0 {
-//        didSet {
-//            subcategory = subcategories[currentSubcategoryIndex]
-//        }
-//    }
-//    let subcategories: [String] = [
-//        "Subcategory 1",
-//        "Subcategory 2"
-//    ]
+    @State var chosenSubcategory: String = ""
 
     var body: some View {
         
@@ -58,17 +45,27 @@ struct ExpenseEntryView: View {
                         ForEach(categories, id: \.self) { (category: Category) in
                             Text(category.name!).tag(category.name!)
                            }
+                        
                     }
-                    Text(chosenCategory)
-
-//                    Picker(selection: $subcategory, label: Text("Subcategory")) {
-//                        ForEach(subcategories, id: \.self) { index in
-//                               Text(index)
-//                           }
-//                        }
-                        .onChange(of: chosenCategory) { _ in
-                           
+                    .onChange(of: chosenCategory) { newValue in
+                        // Runs whenever chosen category changes
+                        subcategories.nsPredicate = NSPredicate(format: "parentCategory.name == %@", newValue)
+                       
+                        
+                    }
+                    
+                    if subcategories.count > 0 {
+                        
+                        Picker(selection: $chosenSubcategory, label: Text("Subcategory")) {
+                            
+                            Text("").tag("")
+                            
+                            ForEach(subcategories, id: \.self) { (subcategory: Subcategory) in
+                                Text(subcategory.name!).tag(subcategory.name!)
+                            }
                         }
+                    }
+
                 }
                 Button("Add") {
                     addItem()

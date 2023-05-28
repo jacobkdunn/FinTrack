@@ -28,7 +28,6 @@ struct SettingsView: View {
             }))
         }
         
-        
     }
     func addCategory() {
         presentTextInputAlert(title: "Add Category", message: "Enter Category Name") { text in
