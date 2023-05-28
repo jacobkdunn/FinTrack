@@ -13,47 +13,30 @@ import CoreData
 struct ExpenseEntryView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Type.name, ascending: true)],
-        animation: .default)
     
-    var items: FetchedResults<Type>
+    @FetchRequest(sortDescriptors: []) var  categories: FetchedResults<Category>
+    @FetchRequest var  subcategories: FetchedResults<Subcategory>
     
-    
+    init(filter: String) {
+        _subcategories = FetchRequest<Subcategory>(sortDescriptors: [], predicate: NSPredicate(format: "parentCategory.name == %@", filter))
+    }
     
     @State var vendor: String = ""
     @State var description: String = ""
     @State var amount: String = ""
  
-    @State var category = ""
-    @State var currentCategoryIndex = 0 {
-        didSet {
-            category = categories[currentCategoryIndex]
-        }
-    }
-    let categories: [String] = [
-        "Groceries",
-        "Housing",
-        "Take out/Order in",
-        "Transportation",
-        "Savings",
-        "School",
-        "Travel",
-        "Miscellaneous",
-        "Not Applicable"
-    ]
+    @State var chosenCategory: String = ""
     
-    @State var subcategory = ""
-    @State var currentSubcategoryIndex = 0 {
-        didSet {
-            subcategory = subcategories[currentSubcategoryIndex]
-        }
-    }
-    let subcategories: [String] = [
-        "Subcategory 1",
-        "Subcategory 2"
-    ]
+//    @State var subcategory = ""
+//    @State var currentSubcategoryIndex = 0 {
+//        didSet {
+//            subcategory = subcategories[currentSubcategoryIndex]
+//        }
+//    }
+//    let subcategories: [String] = [
+//        "Subcategory 1",
+//        "Subcategory 2"
+//    ]
 
     var body: some View {
         
@@ -68,16 +51,23 @@ struct ExpenseEntryView: View {
                     TextField("Amount ($)", text: $amount)
                         .keyboardType(.decimalPad)
                     
-                    Picker(selection: $category, label: Text("Category")) {
-                        ForEach(categories, id: \.self) { index in
-                               Text(index)
+                    Picker(selection: $chosenCategory, label: Text("Category")) {
+                        
+                        Text("").tag("")
+                        
+                        ForEach(categories, id: \.self) { (category: Category) in
+                            Text(category.name!).tag(category.name!)
                            }
-                        }
+                    }
+                    Text(chosenCategory)
 
-                    Picker(selection: $subcategory, label: Text("Subcategory")) {
-                        ForEach(subcategories, id: \.self) { index in
-                               Text(index)
-                           }
+//                    Picker(selection: $subcategory, label: Text("Subcategory")) {
+//                        ForEach(subcategories, id: \.self) { index in
+//                               Text(index)
+//                           }
+//                        }
+                        .onChange(of: chosenCategory) { _ in
+                           
                         }
                 }
                 Button("Add") {
@@ -93,11 +83,12 @@ struct ExpenseEntryView: View {
             let newItem = TrackerListEntry(context: viewContext)
             newItem.itemTitle = vendor
             newItem.itemDescription = description
-            newItem.itemAmount = Double(amount)!
-            newItem.itemCategory = category
-            newItem.itemSubcategory = subcategory
+            newItem.itemAmount = Double(amount) ?? 0.00
+//            newItem.itemCategory = category
+//            newItem.itemSubcategory = subcategory
             newItem.itemTimeStamp = Date()
             newItem.itemTransactionTime = Date()
+            print($chosenCategory)
 
             do {
                 try viewContext.save()
@@ -108,36 +99,26 @@ struct ExpenseEntryView: View {
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
             
-            func getCoreDataDBPath() {
-                    let path = FileManager
-                        .default
-                        .urls(for: .applicationSupportDirectory, in: .userDomainMask)
-                        .last?
-                        .absoluteString
-                        .replacingOccurrences(of: "file://", with: "")
-                        .removingPercentEncoding
-
-                    print("Core Data DB Path :: \(path ?? "Not found")")
-                }
+//            func getCoreDataDBPath()
             
-            getCoreDataDBPath()
+//            getCoreDataDBPath()
         }
     }
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
+//    private func deleteItems(offsets: IndexSet) {
+//        withAnimation {
+//            offsets.map { items[$0] }.forEach(viewContext.delete)
+//
+//            do {
+//                try viewContext.save()
+//            } catch {
+//                // Replace this implementation with code to handle the error appropriately.
+//                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+//                let nsError = error as NSError
+//                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+//            }
+//        }
+//    }
 }
 
 private let itemFormatter: DateFormatter = {
@@ -147,8 +128,8 @@ private let itemFormatter: DateFormatter = {
     return formatter
 }()
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ExpenseEntryView()
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ExpenseEntryView()
+//    }
+//}

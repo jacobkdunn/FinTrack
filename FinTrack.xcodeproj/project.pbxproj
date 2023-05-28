@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		701875A82A1FF1F700EAB064 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701875A72A1FF1F700EAB064 /* SettingsView.swift */; };
+		708408022A23B2A600E8ECAA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 708408012A23B2A500E8ECAA /* GoogleService-Info.plist */; };
 		709491832A20F88200553DD1 /* SubcategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709491822A20F88200553DD1 /* SubcategoryView.swift */; };
 		70CDC1F52A19C4CF0016023E /* FinTrackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CDC1F42A19C4CF0016023E /* FinTrackApp.swift */; };
 		70CDC1F72A19C4CF0016023E /* ExpenseEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CDC1F62A19C4CF0016023E /* ExpenseEntryView.swift */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		701875A72A1FF1F700EAB064 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		708408012A23B2A500E8ECAA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		709491822A20F88200553DD1 /* SubcategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubcategoryView.swift; sourceTree = "<group>"; };
 		70CDC1F12A19C4CF0016023E /* FinTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70CDC1F42A19C4CF0016023E /* FinTrackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinTrackApp.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				70CDC2172A1C32D80016023E /* Controllers */,
 				70CDC1F82A19C4D00016023E /* Assets.xcassets */,
 				70CDC2022A19C4D00016023E /* Info.plist */,
+				708408012A23B2A500E8ECAA /* GoogleService-Info.plist */,
 				70CDC1FA2A19C4D00016023E /* Preview Content */,
 			);
 			path = FinTrack;
@@ -172,6 +175,7 @@
 			files = (
 				70CDC1FC2A19C4D00016023E /* Preview Assets.xcassets in Resources */,
 				70CDC1F92A19C4D00016023E /* Assets.xcassets in Resources */,
+				708408022A23B2A600E8ECAA /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

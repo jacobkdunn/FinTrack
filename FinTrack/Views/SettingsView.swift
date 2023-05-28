@@ -11,12 +11,12 @@ struct SettingsView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     
-    @FetchRequest(sortDescriptors: []) var  Categories: FetchedResults<Category>
+    @FetchRequest(sortDescriptors: []) var  categories: FetchedResults<Category>
     
     
     var body: some View {
         NavigationView {
-            List(Categories) { category in
+            List(categories) { category in
                 NavigationLink{
                     SubcategoryView(category: category)
                 } label: { Text(category.name!)
